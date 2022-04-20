@@ -53,7 +53,7 @@
 <script setup>
 import { ref } from 'vue'
 import { validatePassword } from './rules'
-
+import { useStore } from 'vuex'
 // 数据源
 const loginForm = ref({
   username: 'super-admin',
@@ -90,23 +90,24 @@ const onChangePwdType = () => {
   }
 }
 
+const store = useStore()
 const handleLogin = () => {
   // 进行表单校验
-  // loginFromRef.value.validate((valid) => {
-  //   if (!valid) return
-  //   // 触发登录动作
-  //   loading.value = true
-  //   store
-  //     .dispatch('user/login', loginForm.value)
-  //     .then(() => {
-  //       loading.value = false
-  //       // TODO: 登录后操作
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       loading.value = false
-  //     })
-  // })
+  loginFromRef.value.validate((valid) => {
+    if (!valid) return
+    // 触发登录动作
+    loading.value = true
+    store
+      .dispatch('user/login', loginForm.value)
+      .then(() => {
+        loading.value = false
+        // TODO: 登录后操作
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  })
 }
 const tipsHtml = `
     测试权限账号：<br />
