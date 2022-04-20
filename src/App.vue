@@ -1,15 +1,14 @@
 <template>
-  ddd
-  <el-button type="primary">el-button</el-button>
+  <header>
+    <router-link to="home">Home</router-link>
+    <router-link to="svg-icon">SvgIcon</router-link>
+  </header>
+
+  <router-view></router-view>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+header a {
+  margin-right: 10px;
 }
 </style>

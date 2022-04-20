@@ -1,24 +1,20 @@
 # cm-vue3-admin
 
-## Project setup
+## 项目脚本
+
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
 yarn serve
-```
-
-### Compiles and minifies for production
-```
 yarn build
-```
-
-### Lints and fixes files
-```
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 功能点
+
+- [ ] 实现 SvgIcon 组件
+  - element-plus icon
+  - 本地 icon
+  - 远程 icon
+  - iconfont icon
+- [ ] 登录
+- [ ] API （axios） 封装
