@@ -7,8 +7,8 @@
       :rules="loginRules"
     >
       <div class="title-container">
-        <h3 class="title">{{ $t('msg.login.title') }}</h3>
-        <lang-select class="lang-select" effect="light"></lang-select>
+        <h3 class="title">用户登录</h3>
+        <!-- <lang-select class="lang-select" effect="light"></lang-select> -->
       </div>
       <!-- username -->
       <el-form-item prop="username">
@@ -44,23 +44,83 @@
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
         @click="handleLogin"
-        >{{ $t('msg.login.loginBtn') }}</el-button
+        >登录</el-button
       >
-      <div class="tips" v-html="$t('msg.login.desc')"></div>
+      <div class="tips" v-html="tipsHtml"></div>
     </el-form>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue'
+import { validatePassword } from './rules'
+
 // 数据源
 const loginForm = ref({
   username: 'super-admin',
   password: '123456'
 })
+
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: '用户名为必填项'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatePassword()
+    }
+  ]
+})
+
 const passwordType = ref('password')
 // 登录动作处理
 const loading = ref(false)
 const loginFromRef = ref(null)
+
+const onChangePwdType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
+
+const handleLogin = () => {
+  // 进行表单校验
+  // loginFromRef.value.validate((valid) => {
+  //   if (!valid) return
+  //   // 触发登录动作
+  //   loading.value = true
+  //   store
+  //     .dispatch('user/login', loginForm.value)
+  //     .then(() => {
+  //       loading.value = false
+  //       // TODO: 登录后操作
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       loading.value = false
+  //     })
+  // })
+}
+const tipsHtml = `
+    测试权限账号：<br />
+    提供三种权限账号：<br />
+    1. 超级管理员账号： super-admin <br />
+    2. 管理员账号：admin <br />
+    3. 测试可配置账号：test <br />
+    密码统一为：123456 <br />
+    <br />
+    导入用户账号：<br />
+    可使用导入的用户名登录 <br />
+    密码统一为：123456  <br />
+    <b>注意：导入用户区分中英文库！！！！</b>
+    `
 </script>
 
 <style lang="scss" scoped>
